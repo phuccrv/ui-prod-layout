@@ -1,0 +1,51 @@
+---
+import { getCategories } from "../../core";
+
+const { hostname } = Astro.url;
+const [categories] = await Promise.all([getCategories(Astro.url.hostname)]);
+---
+
+<!-- Page Content --><!-- Banner Starts Here -->
+<section class="about-us">
+  <div class="container">
+    <div class="col">
+      <h2>{hostname} Blog</h2>
+      <div>
+        <h2>Notice of Privacy Policy</h2>
+
+        <p>
+          Thank you for your interest and visit to the website {hostname} (hereinafter
+          referred to as the "Site", "{hostname}", “We”, “Our” , “Blog” ) We
+          always respect and strive to ensure the confidentiality of your
+          private information . individuals below to better understand the
+          commitments we make.
+        </p>
+
+        <p>
+          This Policy will apply to any personal information you provide to Us
+          in the course of working with or/and accessing the Blog. This Policy
+          will also apply to any information about you that is provided to Us by
+          another person, such as a partner with whom We have an agreement.
+        </p>
+        <p>
+          This Privacy Policy describes how We collect and process personal
+          information when you use the Blog's services. By agreeing to use our
+          services , you are fully agreeing to the contents of this Privacy
+          Policy . We may amend the content of the policy by posting a revised
+          version on the Website , the revised version becomes effective from
+          the time of posting and We shall not be obligated to notify you of any
+          changes. change this.
+        </p>
+      </div>
+      <div>
+        <h2>Information We Collect</h2>
+        <p>
+          We do not force you to provide or leave personal information on this
+          Blog. However, in some cases, to be able to fully use the utilities on
+          the Blog, you need to register as a member and provide your personal
+          information. We may collect the following information about you:
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

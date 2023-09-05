@@ -1,0 +1,82 @@
+---
+import { getCategories } from "../../core";
+
+const { hostname } = Astro.url;
+const [categories] = await Promise.all([getCategories(Astro.url.hostname)]);
+---
+
+<div class="heading-page header-text">
+  <section class="page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-content">
+            <h2>about us {hostname}</h2>
+            <h2>more about us!</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="about-us">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>
+          Please tell your friends about {hostname} website. Thank you. You can browse
+          through different categories of templates such as{
+            categories?.map((category) => {
+              return (
+                <a
+                  class="about-a"
+                  rel="nofollow"
+                  href={`/categories/${category.slug}`}
+                  target="_parent"
+                >
+                  {category?.name},
+                </a>
+              );
+            })
+          } etc.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="box-text-one">
+        <div class="col-lg-10">
+          <h2>1- Brief information</h2>
+          <p>
+            The interface is easy to use, fast, and compact enough to meet
+            everyone's needs everyone's needs
+          </p>
+        </div>
+        <div class="col-lg-10">
+          <h2>2-Updated frequently</h2>
+          <p>
+            Content is regularly updated continuously, useful and accurate
+            content is collected from many reliable sources
+          </p>
+        </div>
+      </div>
+      <div class="box-text-tow">
+        <div class="col-lg-10">
+          <h2>3-Easy to use interface</h2>
+          <p>
+            The interface is easy to use, fast, and compact enough to meet
+            everyone's needs
+          </p>
+        </div>
+        <div class="col-lg-10">
+          <h2>4-Easy to use vinfast</h2>
+          <p>
+            The interface is easy to use, fast, and compact enough to meet
+            everyone's needs
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

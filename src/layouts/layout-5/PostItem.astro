@@ -1,0 +1,56 @@
+---
+const {
+  title,
+  excerpt,
+  slug,
+  createdAt,
+  author = "Admin",
+  category,
+  unit,
+  pid,
+} = Astro.props as IPost & IAds;
+---
+
+<div class="blog-post">
+  <div class="down-content">
+    <a href={`/posts/${slug}`}>
+      <h4>{title}</h4>
+    </a>
+    <ul class="post-info">
+      <li>
+        <a>{author}</a>
+      </li>
+      <li>-</li>
+      <li><a>{new Date(createdAt).toLocaleDateString()}</a></li>
+      <li>
+        <ul class="post-tags">
+          <li><i class="fa fa-tags"></i></li>
+          <li><a>{category}</a></li>
+        </ul>
+      </li>
+
+      <p class="down-content-list-border">{excerpt}</p>
+    </ul>
+  </div>
+</div>
+<!-- HORIZONTAL HOME -->
+{
+  pid && unit && unit["horizontal1"] && (
+    <div class="blog-post">
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${pid}`}
+        crossorigin="anonymous"
+      />
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client={`ca-${pid}`}
+        data-ad-slot={unit["horizontal1"]}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  )
+}

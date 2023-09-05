@@ -1,0 +1,85 @@
+---
+import { getRecommendedPosts } from "../../core";
+
+interface Props {
+  json?: IPost;
+  ads?: IAds;
+  notFound?: string;
+}
+
+const recommended = await getRecommendedPosts(Astro.url.hostname);
+
+const {
+  json,
+  ads,
+  notFound = "Sorry, the page you were looking for in this blog does not exist.",
+} = Astro.props;
+---
+
+<>
+  {
+    json ? (
+      <div class="all-blog-posts">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="blog-post">
+              <div class="blog-thumb" />
+              <div class="down-content">
+                <div class="sidebar-item recent-posts">
+                  <div class="content">
+                    <ul>
+                      {recommended?.map((recommended) => {
+                        return (
+                          <li class="header-detail">
+                            <a href={`/posts/${recommended.slug}`}>
+                              <h5>{recommended.title}</h5>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <ul class="post-info down-content-border">
+                  <li>
+                    <a>{json?.author || "Admin"}</a>
+                  </li>
+                  -
+                  <li>
+                    <a>{json?.category}</a>
+                  </li>
+                  -
+                  <li>
+                    <a>{new Date(json?.createdAt).toDateString()}</a>
+                  </li>
+                </ul>
+                <Fragment
+                  set:html={json.content
+                    .replaceAll("ADS_PID", ads?.pid!)
+                    .replaceAll(
+                      "horizontal1",
+                      (ads?.unit && ads?.unit["horizontal1"]) || ""
+                    )
+                    .replaceAll(
+                      "horizontal2",
+                      (ads?.unit && ads?.unit["horizontal2"]) || ""
+                    )
+                    .replaceAll(
+                      "horizontal3",
+                      (ads?.unit && ads?.unit["horizontal3"]) || ""
+                    )
+                    .replaceAll(
+                      "horizontal4",
+                      (ads?.unit && ads?.unit["horizontal4"]) || ""
+                    )}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <Fragment set:html={notFound} />
+    )
+  }
+</>

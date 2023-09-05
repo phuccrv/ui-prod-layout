@@ -1,0 +1,10 @@
+---
+import { getPosts } from "../../core";
+import Layout from "../../layouts/layout-1/Layout.astro";
+
+const { pathname, hostname } = Astro.url;
+
+const json = await getPosts(hostname, pathname);
+---
+
+<Layout json={json?.data} totalRecords={json?.totalRecords} />

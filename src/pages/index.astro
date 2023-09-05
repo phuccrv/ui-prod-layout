@@ -1,0 +1,16 @@
+---
+import { getPosts } from "../core";
+// import Layout from "../layouts/layout-5/Layout.astro";
+import Layout from "../layouts/layout-1/Layout.astro";
+
+const { pathname, searchParams, hostname } = Astro.url;
+
+const json = await getPosts(
+  hostname,
+  pathname !== "/" ? pathname : "",
+  searchParams.get("page") || "1"
+);
+console.log(json.data.length);
+---
+
+<Layout json={json?.data} totalRecords={json?.totalRecords} />
